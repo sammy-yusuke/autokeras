@@ -270,6 +270,7 @@ class PortableImageSupervised(PortableClass):
         outputs = []
         with torch.no_grad():
             for index, inputs in enumerate(test_loader):
+                inputs = torch.from_numpy(inputs).cuda()
                 outputs.append(model(inputs).cpu().numpy())
         output = np.concatenate(outputs)
         # output = reduce(lambda x, y: np.concatenate((x, y)), outputs)
